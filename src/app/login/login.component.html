@@ -1,0 +1,93 @@
+
+<!-- <ng-template #h  *ngIf="isauth; else l">
+    <h3 class="text-center text-info">Você está logado</h3>
+</ng-template> -->
+
+
+
+
+
+    <form   #f="ngForm" class="form" action="" method="post" (ngSubmit)="onSubmit(f)" >
+        
+        <div id="login">
+            <h3 class="text-center text-white pt-5">Login form</h3>
+            <div *ngIf="isInvalidLogin" class="alert alert-danger">Invalid username or password</div> 
+            <div class="container">
+                <div id="login-row" class="row justify-content-center align-items-center">
+                    <div id="login-column" class="col-md-6">
+                        <div id="login-box" class="col-md-12">
+                          
+                                <h3 class="text-center text-info">Login</h3>
+                                <div class="form-group">
+                                    <label for="nome" class="text-info">Username:</label><br>
+                                    <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" ngModel>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="text-info">Password:</label><br>
+                                    <input type="password" class="form-control" id="password" placeholder="senha" name="password" ngModel>
+                                </div>
+                                <br>
+                                <div class="form-group">
+                                    <!-- <label for="remember-me" class="text-info"><span>Remember me</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br> -->
+                                    <button type="submit" class="btn btn-primary">Submit</button>   
+                                </div>
+                               
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+        
+        
+
+
+
+
+
+
+
+<!-- 
+
+
+<form #f="ngForm"  (ngSubmit)="onSubmit(f)" >
+    <div class="main-container" id="main-container">
+        
+     <h2 class="form-signin-heading">Login</h2>
+        <!-- <div  class="alert alert-danger">Invalid username or password</div> 
+        <br>
+        <div class="row">
+            <div class="col-xs-12 col-sm-2">
+        <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" class="form-control" id="nome" placeholder="Nome" name="nome" ngModel col s6>
+    
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-2">
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="senha" name="password" ngModel col s6>
+    
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-2">
+        <div class="form-group">
+            <label for="role">role</label>
+            <input type="text" class="form-control" id="role" placeholder="role" name="role" ngModel col s6>
+    
+        </div>
+        
+    </div> 
+</div>
+    <br/>   <br/> 
+        <button type="submit" class="btn btn-primary">Submit</button>        
+
+    </div>
+
+</form> -->
