@@ -1,0 +1,19 @@
+<form class="form-horinzontal" [formGroup]="formulario" (ngSubmit)="onsubmit()">
+    <div class="form-group">
+        <div class="col-sm-12">
+            <label for="nome">Nome</label>
+        </div>
+       
+        <div class="col-sm-12">
+            <input type="text" class="form-control" id="nome" formControlName ="nome" placeholder="Nome">
+        </div>
+    </div><br>    
+    <br>        
+    
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    
+
+</form>
+
+
