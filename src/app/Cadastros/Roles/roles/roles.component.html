@@ -1,6 +1,21 @@
 <p>roles works!</p>
 
-<li *ngFor = "let item of roles">
+<div *ngIf="role$ ; else loading">
+    
+    <li *ngFor = "let item of role$">
 
-    {{ item.name }}
-</li>
+        {{ item.name }}
+
+    </li>
+</div>
+
+<ng-template #loading>
+    <div *ngIf="erro$ | async ; else loading">
+    Erro ao carregar. Tente novamente mais tarde.
+    </div>
+    <ng-template #loading>
+        <span>Carregando lista...</span>
+    </ng-template>
+    
+
+</ng-template>

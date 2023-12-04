@@ -1,19 +1,55 @@
-<form class="form-horinzontal" [formGroup]="formulario" (ngSubmit)="onsubmit()">
-    <div class="form-group">
+
+
+    <div *ngIf="success">  
+      <div *ngFor= "let alert of alerts">
+        <div *ngIf="alert.type == 'success' ">
+          <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{ alert.msg }}</alert>
+        </div>
+      </div>            
+    </div>   
+    
+    <div *ngIf="error">  
+      <div *ngFor= "let alert of alerts">
+        <div *ngIf="alert.type == 'danger' ">
+          <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)" >{{ alert.msg }}</alert>
+        </div>
+      </div>            
+    </div>   
+    
+       <div>
+        <h1>Cadastro de role</h1>
+       </div>
+
+<form  class="form-horinzontal row g-3 needs-validation" [formGroup]="formulario"  (ngSubmit)="onsubmit()"  #formularios="ngForm"  >    
+      <div class="form-group" >
         <div class="col-sm-12">
             <label for="nome">Nome</label>
         </div>
        
         <div class="col-sm-12">
-            <input type="text" class="form-control" id="nome" formControlName ="nome" placeholder="Nome">
+            <input type="text" class="form-control" id="nome" formControlName="nome"  placeholder="Nome"  required>            
+        </div>       
+        <div *ngIf="error">
+          <div style="color: red;">
+            {{retorno}}
+          </div>        
         </div>
     </div><br>    
-    <br>        
+    <br>            
     
-    <button type="submit" class="btn btn-primary">Submit</button>
-
-    
-
+    <button type="submit" class="btn btn-primary"  [disabled]="formularios.invalid" >Submit</button>
 </form>
+
+<ng-template  #template>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is a modal.
+    </div>
+  </ng-template>
 
 

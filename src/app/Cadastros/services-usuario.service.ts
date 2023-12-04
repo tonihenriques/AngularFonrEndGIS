@@ -12,13 +12,13 @@ export class ServicesUsuario {
     addUser(user: any):Observable<any>{
 
       console.log("Usuario =", user)
-      return this.http.post('https://localhost:7001/api/User', user)
+      return this.http.post('https://localhost:7131/api/User', user)
     }
 
 
     getUser():Observable<any>{
 
-      return this.http.get('https://localhost:7001/api/User')
+      return this.http.get('https://localhost:7130/api/User')
       
     }
 

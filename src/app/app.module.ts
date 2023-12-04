@@ -13,9 +13,16 @@ import { AuthGuard } from './Guards/auth-guard';
 import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
 import { ServicesUsuario } from './Cadastros/services-usuario.service';
 import { RolesComponent } from './Cadastros/Roles/roles/roles.component';
-import { CadastroRolesComponent } from './Cadastros/Roles/cadastro-roles/cadastro-roles.component';
 import { NgbAlertModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgFor } from '@angular/common';
+import { AlertModalComponent } from './Shared/alert-modal/alert-modal.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { ModalService } from './Shared/modal-service.service';
+import { CadastroRolesModule } from './Cadastros/Roles/cadastro-roles/cadastro-roles.module';
+
+
+
 
 
 export function tokenGetter(){
@@ -28,9 +35,9 @@ export function tokenGetter(){
     LoginComponent,
     HomeComponent,
     UsuarioComponent,
-    RolesComponent,
-    CadastroRolesComponent,
-    
+    RolesComponent,  
+     
+   
   ],
   imports: [
     BrowserModule,
@@ -38,8 +45,8 @@ export function tokenGetter(){
     HttpClientModule,
     FormsModule,    
     ReactiveFormsModule ,
-    NgbAlertModule,
-    NgFor,
+    NgbAlertModule,    
+    NgFor,      
     JwtModule.forRoot({
       config:{
         tokenGetter: tokenGetter,
@@ -47,9 +54,12 @@ export function tokenGetter(){
         disallowedRoutes: []
       }
     }),
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule,
+    CadastroRolesModule
   ],
-  providers: [LoginsServiceService, AuthGuard ,ServicesUsuario ] , 
+    
+    providers: [LoginsServiceService, AuthGuard ,ServicesUsuario,  BsModalService, ModalService, AlertModalComponent ] , 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

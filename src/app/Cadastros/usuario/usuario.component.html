@@ -1,4 +1,16 @@
-<form class="form-horinzontal" [formGroup]="formulario" (ngSubmit)="onsubmit()">
+
+<div class="alert alert-success" *ngIf="user$; else erro">
+    Cadastro realizado com sucesso!
+</div>
+<ng-template #erro>
+    <div class="alert alert-danger" *ngIf="error$ ">
+        Houve algum erro de conexão, por favor tente mais tarde!
+    </div>
+</ng-template>
+
+
+<form class="form-horinzontal" [formGroup]="formulario" (ngSubmit)="onsubmit()">    
+
     <div class="form-group">
         <div class="col-sm-12">
             <label for="nome">Nome</label>

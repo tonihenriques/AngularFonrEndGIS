@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginsServiceService } from '../logins-service.service';
+import { Guid } from 'guid-typescript';
 
 
 @Component({
@@ -28,10 +29,13 @@ export class LoginComponent  {
     console.log("Form = ", form.value)
 
     const credentials ={
+      "id": Guid,
+      "dataInclusao": Date,
+      "usuarioExclusao": "string",
+      "dataExclusao": Date,
       'username': form.value.nome,
       'password': form.value.password,
-      'role': 'Amin',
-      "phoneNumber": ""
+      "phoneNumber": "string"
 
     }
 

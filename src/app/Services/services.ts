@@ -9,7 +9,7 @@ export class Services {
   constructor(private http: HttpClient) { }
 
   getCustomer(){
-    return this.http.get<string>("http://localhost:5130/api/Customers");  
+    return this.http.get<string>("http://localhost:7130/api/Customers");  
 
   }
 }

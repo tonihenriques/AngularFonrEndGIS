@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, catchError, interval, map } from 'rxjs';
 import { ServicesUsuario } from '../services-usuario.service';
+import { Guid } from 'guid-typescript';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -11,11 +13,22 @@ import { ServicesUsuario } from '../services-usuario.service';
 })
 
 
-export class UsuarioComponent {
+export class UsuarioComponent implements OnDestroy  {
 
   constructor(private formBuilder: FormBuilder,
-    private http: HttpClient, private serviceuser: ServicesUsuario
+    private http: HttpClient, private serviceuser: ServicesUsuario, private router: Router
     ){};   
+    
+  
+  dados: any;
+  erroMessage: any;
+  user$: Observable<any> | any;
+  success$: Observable<any> | any;
+  error$: Observable<any> | any;
+
+  source = interval(1000);
+ 
+
 
    formulario = this.formBuilder.group({
     nome: [''],
@@ -23,30 +36,16 @@ export class UsuarioComponent {
     phone: ['']
    })
    
-  ngOnit(){
-    
-  }
-
-  limpaCampos(){
-    this.formulario.setValue({
-      nome: '',
-      password: '',
-      phone: ''
-    })
-  }
-
-  dados: any;
-  erroMessage: any;
+ 
 
   onsubmit(){
-
     
   const user = {
 
-    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-    "dataInclusao": "2023-11-14T21:56:57.599Z",
+    "id": Guid,
+    "dataInclusao": Date,
     "usuarioExclusao": "string",
-    "dataExclusao": "2023-11-14T21:56:57.599Z",
+    "dataExclusao": Date,
     "username" : this.formulario.get('nome')?.value,
     "password": this.formulario.get('password')?.value,
     "phoneNumber": this.formulario.get('phone')?.value,
@@ -56,18 +55,26 @@ export class UsuarioComponent {
 
     console.log(this.formulario)
     
-    this.serviceuser.addUser(user)    
+   
+    this.success$ = this.serviceuser.addUser(user)        
     .subscribe({
-      next: (data)=>   
-      console.log(data),      
-      error: (e) => console.error(e),
+      next: (data)=> alert("Cadastrado com sucesso!"),  
+      //this.user$ = data,      
+      error: (e) =>   //this.router.navigate(["alert"]),
+      this.error$ =  e,
       complete: () => console.info('complete')      
 
-    },
-    );
+    }, 
+    );   
 
-    this.limpaCampos()
-   
+    this.limpaCampos(); 
+    //this.ngOnDestroy();
+    
+  }
+
+  ngOnDestroy(): void {
+   //setTimeout( ()=>{this.success$.unsubscribe()}, 1000);
+   //setInterval(this.success$.unsubscribe(),1000)
   }
 
 
@@ -82,6 +89,18 @@ export class UsuarioComponent {
         this.erroMessage = error.erroMessage;
         console.log('There was an error', this.erroMessage)
       }
+    })
+  }
+
+  onRefresh(){
+    this.router.navigate(["usuario"]);
+  }
+  
+  limpaCampos(){
+    this.formulario.setValue({
+      nome: '',
+      password: '',
+      phone: ''
     })
   }
 
