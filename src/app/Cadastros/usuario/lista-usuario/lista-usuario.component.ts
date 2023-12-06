@@ -1,13 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { RolesService } from '../roles.service';
-import { Observable, Subject } from 'rxjs';
-import {  Router } from '@angular/router';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { RolesService } from '../../Roles/roles.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Observable, Subject } from 'rxjs';
 import { AlertComponent } from 'ngx-bootstrap/alert';
-import { FormBuilder } from '@angular/forms';
-import { ModalService } from 'src/app/Shared/modal-service.service';
-
-
+import { ServicesUsuario } from '../../services-usuario.service';
 
 
 interface role {
@@ -17,12 +13,18 @@ interface role {
 
 
 @Component({
-  selector: 'app-roles',
-  templateUrl: './roles.component.html',
-  styleUrls: ['./roles.component.css']
+  selector: 'app-lista-usuario',
+  templateUrl: './lista-usuario.component.html',
+  styleUrls: ['./lista-usuario.component.css']
 })
 
-export class RolesComponent implements OnInit {
+export class ListaUsuarioComponent implements OnInit {
+
+  constructor(private roleService: RolesService, private modalService: BsModalService, private serviceuser: ServicesUsuario) { }
+  ngOnInit(): void {
+   this.getUser();
+  }
+
 
   modalRef?: BsModalRef;
   @ViewChild('deleteModal') deleteModal: any;
@@ -39,14 +41,6 @@ export class RolesComponent implements OnInit {
   dados: role | undefined
 
 
-  
-
-  constructor(private roleService: RolesService, private modalService: BsModalService
-    ) {
-
-  }
-
-  
   alerts: any[] = [{
     type: 'success',
     msg: `Exclusão realizada com sucesso  em  ${new Date().toLocaleDateString()} as ${new Date().toLocaleTimeString()}`,
@@ -61,65 +55,62 @@ export class RolesComponent implements OnInit {
   }
   ];
 
-  ngOnInit(): void {
-    this.getRoles();
 
-  }
-
-  
   onClosed(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
 
-  getRoles() {
-    this.roleService.getRoles()
+  getUser() {
+    this.serviceuser.getUsers()
       .subscribe({
-        next: (data) => { this.role$ = data, this.dados = data, console.log("Dados", this.role$)},
+        next: (data) => { this.role$ = data, this.dados = data, console.log("Dados", this.role$) },
         error: (e) => this.erro$ = e,
         complete: () => console.info('complete')
 
       })
   }
 
-  onRefresh(){        
-    setTimeout(()=>{                          
+  onRefresh() {
+    setTimeout(() => {
       window.location.reload()
     }, 3000);
 
   }
-  deletRoles(id: string) { 
+  deleteUser(id: string) {
 
     this.roleId = id;
-    this.modalRef = this.modalService.show(this.deleteModal, {class: 'modal-sm'});
-    console.log("entrou bonito!")
-   
+    this.modalRef = this.modalService.show(this.deleteModal, { class: 'modal-sm' });
   }
 
- 
+
   openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
- 
+
   confirm(): void {
 
-    this.roleService.deleteRoles(this.roleId)
+    this.serviceuser.deleteUser(this.roleId)
       .subscribe({
-        next: () => { console.log("Delete"), this.success = true},
-        error: (e) => {this.erro$ = e, this.error = false},
+        next: () => { console.log("Delete"), this.success = true },
+        error: (e) => { this.erro$ = e, this.error = false },
         complete: () => console.info('complete')
       })
 
-      this.modalRef?.hide();
+    this.modalRef?.hide();
 
     this.onRefresh();
-   
+
   }
- 
+
   decline(): void {
-    
+
     this.modalRef?.hide();
   }
 
 
+
+
 }
+
+

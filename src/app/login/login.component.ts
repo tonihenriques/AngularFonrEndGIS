@@ -29,14 +29,15 @@ export class LoginComponent  {
     console.log("Form = ", form.value)
 
     const credentials ={
-      "id": Guid,
-      "dataInclusao": Date,
-      "usuarioExclusao": "string",
-      "dataExclusao": Date,
+      
       'username': form.value.nome,
       'password': form.value.password,
-      "phoneNumber": "string"
+      "role": "string",
+      "phoneNumber": "string",
+      "roleId": "string",
+      "email": "string"
 
+     
     }
 
       this.login.login(credentials);

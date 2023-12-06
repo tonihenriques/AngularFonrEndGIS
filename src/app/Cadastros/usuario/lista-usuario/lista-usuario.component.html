@@ -15,7 +15,7 @@
   </div>   
 
 
-<h1>lista Roles</h1>
+<h1>lista de Usuários</h1>
 
 
 <div *ngIf="role$ != 0; else nulo">
@@ -23,7 +23,7 @@
     <table id="dynamic-table" class="table table-striped table-bordered table-hover">
         <thead>
             <tr>
-                <th scope="col">Role</th>
+                <th scope="col">Usuários</th>
                 <th [width]="400" scope="col">Actions</th>
 
             </tr>
@@ -33,16 +33,18 @@
             <tr *ngFor="let item of role$">
 
                 <td>
-                    {{ item.name }}
+                  {{ item.username }}
 
                 </td>
                 <td>
-                    <button type="button" class="btn btn-primary" (click)="deletRoles(item.id)">Delete</button>
+                    <button type="button" class="btn btn-primary" (click)="deleteUser(item.id)">Delete</button>
                 </td>
 
             </tr>
 
         </tbody>
+
+        
     </table>
 
 </div>

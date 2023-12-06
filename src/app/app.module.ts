@@ -20,8 +20,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ModalService } from './Shared/modal-service.service';
 import { CadastroRolesModule } from './Cadastros/Roles/cadastro-roles/cadastro-roles.module';
-
-
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { ListaUsuarioComponent } from './Cadastros/usuario/lista-usuario/lista-usuario.component';
+import { BaseUrlComponent } from './Shared/base-url/base-url.component';
 
 
 
@@ -35,7 +36,9 @@ export function tokenGetter(){
     LoginComponent,
     HomeComponent,
     UsuarioComponent,
-    RolesComponent,  
+    RolesComponent,
+    ListaUsuarioComponent,
+    BaseUrlComponent,  
      
    
   ],
@@ -46,7 +49,8 @@ export function tokenGetter(){
     FormsModule,    
     ReactiveFormsModule ,
     NgbAlertModule,    
-    NgFor,      
+    NgFor,    
+    AlertModule.forRoot(),   
     JwtModule.forRoot({
       config:{
         tokenGetter: tokenGetter,
@@ -56,10 +60,11 @@ export function tokenGetter(){
     }),
     NgbModule,
     BrowserAnimationsModule,
-    CadastroRolesModule
+    CadastroRolesModule,
+    
   ],
     
-    providers: [LoginsServiceService, AuthGuard ,ServicesUsuario,  BsModalService, ModalService, AlertModalComponent ] , 
+    providers: [LoginsServiceService, AuthGuard ,ServicesUsuario,  BsModalService, ModalService, AlertModalComponent,BaseUrlComponent ] , 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

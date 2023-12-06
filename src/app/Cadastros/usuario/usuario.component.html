@@ -1,41 +1,124 @@
+<div class="row g-1">
 
-<div class="alert alert-success" *ngIf="user$; else erro">
-    Cadastro realizado com sucesso!
-</div>
-<ng-template #erro>
-    <div class="alert alert-danger" *ngIf="error$ ">
-        Houve algum erro de conexão, por favor tente mais tarde!
+
+    <div *ngIf="success">
+        <div *ngFor="let alert of alerts">
+            <div *ngIf="alert.type == 'success' ">
+                <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{
+                    alert.msg }}</alert>
+            </div>
+        </div>
     </div>
-</ng-template>
+
+    <div *ngIf="error">
+        <div *ngFor="let alert of alerts">
+            <div *ngIf="alert.type == 'danger' ">
+                <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout" (onClosed)="onClosed(alert)">{{
+                    alert.msg }}</alert>
+            </div>
+        </div>
+    </div>
 
 
-<form class="form-horinzontal" [formGroup]="formulario" (ngSubmit)="onsubmit()">    
+    <h1>Cadastro de usuários</h1>
 
-    <div class="form-group">
-        <div class="col-sm-12">
-            <label for="nome">Nome</label>
+    <form class="form-horinzontal row g-3 needs-validation" [formGroup]="formulario" (ngSubmit)="onsubmit()"
+        #formularios="ngForm">
+        <div class="col-sm-7">
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="nome">Nome</label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome"
+                        required>
+                    <span class="text-danger"
+                        *ngIf="(formulario.controls.nome.pristine && formulario.controls.nome.invalid &&  formulario.controls.nome.touched) ">
+                        Nome é obrigatório
+                    </span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="password">Password</label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="password" class="form-control" id="password" formControlName="password"
+                        placeholder="Password" required>
+                    <span class="text-danger"
+                        *ngIf="(formulario.controls.password.pristine && formulario.controls.password.invalid &&  formulario.controls.password.touched ) ">
+                        Password é obrigatório
+                    </span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="email">Email</label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="email" formControlName="email" placeholder="Email"
+                        required>
+                    <span class="text-danger"
+                        *ngIf="(formulario.controls.email.pristine && formulario.controls.email.invalid &&  formulario.controls.email.touched) ">
+                        Email é obrigatório
+                    </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label for="phone">Phone Number</label>
+                </div>
+                <div class="col-sm-12">
+                    <input type="text" class="form-control" id="phone" formControlName="phone"
+                        placeholder="Phone Number" required>
+                    <span class="text-danger"
+                        *ngIf="(formulario.controls.phone.pristine && formulario.controls.phone.invalid &&  formulario.controls.phone.touched) ">
+                        Telefone é obrigatório
+                    </span>
+                </div>
+            </div><br>
         </div>
-       
-        <div class="col-sm-12">
-            <input type="text" class="form-control" id="nome" formControlName ="nome" placeholder="Nome">
+
+        <div class="col-sm-5">
+            <div class="form-group">
+
+                <h3>Selecione um Role para o usuário</h3>
+
+                <div *ngIf="role$ != 0; else nulo">
+
+                    <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">Role</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of role$">
+                                <td>
+                                    <div class="form-check">
+                                        <input formControlName="roleId" type="radio" value={{item.id}}>&nbsp;
+                                        <label class="form-check-label" for="flexRadioDefault1">
+                                            {{ item.name }}
+                                        </label>
+                                    </div>
+
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <ng-template #nulo>
+                <h3>Nenhum dado encontrado!</h3>
+            </ng-template>
         </div>
-    </div><br>
-    <div class="form-group">
-        <div class="col-sm-12">
-            <label for="password">Password</label>
-        </div>
-        <div class="col-sm-12">
-            <input type="password" class="form-control" id="password"  formControlName ="password" placeholder="Password">
-        </div>       
-    </div><br>
-    <div class="form-group">
-        <div class="col-sm-12">
-            <label for="phone">Phone Number</label>
-        </div>
-        <div class="col-sm-12">
-            <input type="text" class="form-control" id="phone" formControlName ="phone" placeholder="Phone Number">
-        </div>
-    </div><br>
-    
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+
+        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Submit</button>
+    </form>
+
+
+
+</div>

@@ -24,7 +24,7 @@ import { AppComponent } from 'src/app/app.component';
     NgbAlertModule,    
     NgFor,   
     AlertModule.forRoot(),  
-    NgbAlertModule, 
+    
   ],
   providers: [ AlertModalComponent ] , 
   bootstrap: [AppComponent]

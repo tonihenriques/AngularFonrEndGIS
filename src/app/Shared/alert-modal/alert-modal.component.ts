@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, Input, TemplateRef } from '@angular/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Observable, Subscription, combineLatest } from 'rxjs';
+import { RolesService } from 'src/app/Cadastros/Roles/roles.service';
 
 interface role{
   id: number;
@@ -17,6 +18,7 @@ export class AlertModalComponent {
 
    @Input() title: string | any;
    @Input() msg: string | any;
+   @Input() func: string | any;
 
   modalRef?: BsModalRef;
   subscriptions: Subscription[] = [];
@@ -27,8 +29,8 @@ export class AlertModalComponent {
   cadastro$: Observable<role> | any;
   erro$: Observable<string> | any; 
 
-   constructor(){}
+   constructor( ){}
 
-  
+
 
 }

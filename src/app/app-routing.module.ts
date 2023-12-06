@@ -7,6 +7,7 @@ import { AuthGuard } from './Guards/auth-guard';
 import { UsuarioComponent } from './Cadastros/usuario/usuario.component';
 import { RolesComponent } from './Cadastros/Roles/roles/roles.component';
 import { CadastroRolesComponent } from './Cadastros/Roles/cadastro-roles/cadastro-roles.component';
+import { ListaUsuarioComponent } from './Cadastros/usuario/lista-usuario/lista-usuario.component';
 
 
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   {path:'', pathMatch: 'full', redirectTo: 'login'},
   {path:'login', component: LoginComponent},
   {path:'usuario', component: UsuarioComponent},
-  {path:'roles', component: RolesComponent},
+  {path:'ListRoles', component: RolesComponent},
+  {path:'ListUser', component: ListaUsuarioComponent},
   {path:'cadastro', component: CadastroRolesComponent},   
   {path:'home', component: HomeComponent, canActivate: [AuthGuard]}
 ];

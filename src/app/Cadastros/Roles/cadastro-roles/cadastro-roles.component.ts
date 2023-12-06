@@ -1,16 +1,14 @@
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { RolesService } from '../roles.service';
-import { Observable, Subject, Subscription, combineLatest, isEmpty, timer } from 'rxjs';
+import { Observable, Subject, Subscription, combineLatest, isEmpty, timeout, timer } from 'rxjs';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ModalService } from 'src/app/Shared/modal-service.service';
 import { AlertComponent } from 'ngx-bootstrap/alert';
-import { NgForm } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
+
 
 
 interface role {
-
   id: number;
   Nome: string
 }
@@ -21,7 +19,7 @@ interface role {
   templateUrl: './cadastro-roles.component.html',
   styleUrls: ['./cadastro-roles.component.css']
 })
-export class CadastroRolesComponent implements OnDestroy, OnInit {
+export class CadastroRolesComponent implements OnInit {
 
   role: any = {
     nome: ''
@@ -29,8 +27,6 @@ export class CadastroRolesComponent implements OnDestroy, OnInit {
   modalRef?: BsModalRef;
   subscriptions: Subscription[] = [];
   ms: boolean = false;
-
-
   cadastro$: Observable<role> | any;
   erro$: Observable<string> | any;
   subscription: Subscription | any;
@@ -64,10 +60,10 @@ export class CadastroRolesComponent implements OnDestroy, OnInit {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
-  openModalService(){
+  // openModalService(){
 
-    this.SmodalService.openAlertModal("Succsses", "Cadastro Confirmado!");
-  };
+  //   this.SmodalService.openAlertModal("Succsses", "Cadastro Confirmado!");
+  // };
 
 
   unsubscribe() {
@@ -92,13 +88,18 @@ export class CadastroRolesComponent implements OnDestroy, OnInit {
     })
   }
 
+
+  onRefresh() {
+    setTimeout(() => {
+      window.location.reload()
+    }, 8000);
+
+  }
+
   onsubmit() {
 
     const role = {
-      id: Number,
-      dataInclusao: Date,
-      usuarioExclusao: "string",
-      dataExclusao: Date,
+      
       name: this.formulario.get('nome')?.value
     }
 
@@ -108,20 +109,15 @@ export class CadastroRolesComponent implements OnDestroy, OnInit {
 
     this.roleService.addRoles(role)
       .subscribe({
-        next: (data) => { this.cadastro$ = data, this.success = true, this.error = false, this.limpaCampos()},
-        error: (e) => { this.erro$ = e, this.retorno = e.error.text, this.error = true, this.success = false ,this.openModalService() },
+        next: (data) => { this.cadastro$ = data, this.success = true, this.error = false, this.limpaCampos() },
+        error: (e) => { this.erro$ = e, this.retorno = e.error.text, this.error = true },
         complete: () => console.info('complete'),
 
       });
 
-   
+
   }
 
-
-  ngOnDestroy(): void {
-    this.erro$.next(true);
-    this.erro$.complete();
-  }
 
 
   listaData() {

@@ -27,13 +27,18 @@
         </div>
        
         <div class="col-sm-12">
-            <input type="text" class="form-control" id="nome" formControlName="nome"  placeholder="Nome"  required>            
-        </div>       
-        <div *ngIf="error">
-          <div style="color: red;">
-            {{retorno}}
-          </div>        
-        </div>
+            <input type="text" class="form-control" id="nome" formControlName="nome"  placeholder="Nome"  required> 
+            <span class="text-danger" *ngIf="(formulario.controls.nome.touched && formulario.invalid) ">
+              Nome é obrigatório
+            </span>       
+            <div *ngIf="error">
+              <div style="color: red;">
+                {{retorno}}
+              </div>        
+            </div>       
+        </div>   
+       
+        
     </div><br>    
     <br>            
     

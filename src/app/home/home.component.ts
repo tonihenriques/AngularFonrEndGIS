@@ -30,13 +30,6 @@ ngOnInit(){
 
     this.isUserAuthenticated();
 
-  this.customer.getCustomer()
-    .subscribe(response=>{
-      this.lista = response;
-    }, err=> {
-      console.log(err)
-
-    } )
     
   console.log("LISTA=",this.lista)
 
