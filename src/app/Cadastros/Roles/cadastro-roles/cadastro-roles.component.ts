@@ -60,10 +60,10 @@ export class CadastroRolesComponent implements OnInit {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
 
-  // openModalService(){
+  openModalService(){
 
-  //   this.SmodalService.openAlertModal("Succsses", "Cadastro Confirmado!");
-  // };
+    this.SmodalService.openAlertModal("Succsses", "Cadastro Confirmado!");
+  };
 
 
   unsubscribe() {
@@ -100,7 +100,7 @@ export class CadastroRolesComponent implements OnInit {
 
     const role = {
       
-      name: this.formulario.get('nome')?.value
+      Name: this.formulario.get('nome')?.value
     }
 
     var textErro: string;
@@ -110,7 +110,7 @@ export class CadastroRolesComponent implements OnInit {
     this.roleService.addRoles(role)
       .subscribe({
         next: (data) => { this.cadastro$ = data, this.success = true, this.error = false, this.limpaCampos() },
-        error: (e) => { this.erro$ = e, this.retorno = e.error.text, this.error = true },
+        error: (e) => { this.erro$ = e, this.retorno = e.error.text, this.error = true, console.log("ERROR", e) },
         complete: () => console.info('complete'),
 
       });

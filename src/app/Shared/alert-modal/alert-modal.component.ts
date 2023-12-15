@@ -1,7 +1,7 @@
-import { ChangeDetectorRef, Component, Input, TemplateRef } from '@angular/core';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Observable, Subscription, combineLatest } from 'rxjs';
-import { RolesService } from 'src/app/Cadastros/Roles/roles.service';
+import { Component, Input } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Observable, Subscription } from 'rxjs';
+
 
 interface role{
   id: number;

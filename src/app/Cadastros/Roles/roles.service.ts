@@ -1,8 +1,10 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NotFoundError, Observable, catchError, map, take, throwError } from 'rxjs';
 import { BaseUrlComponent } from 'src/app/Shared/base-url/base-url.component';
+
+
 
 
 @Injectable({
@@ -14,15 +16,25 @@ export class RolesService {
 
   
 getRoles(){
+  // var reqHeader = new HttpHeaders({
+  //   'Content-Type': 'aplication/json',
+  //   "Authorization": 'Bearer '+ this.baseUrl.token
+  // });
 
-  return this.http.get<any>(this.baseUrl.BaseUrlRoles);
+  return this.http.get<any>(this.baseUrl.BaseUrlRoles)
+  
 
 }
 
 addRoles(role: any):Observable<any>{
-   
-    return this.http.post<any>(this.baseUrl.BaseUrlRoles, role)      
-  
+
+  var reqHeader = new HttpHeaders({
+    'Content-Type': 'aplication/json',
+    'Authorization': 'Bearer '+ this.baseUrl.token
+  });
+
+    return this.http.post(this.baseUrl.BaseUrlRoles,role)
+
 }
 
 

@@ -1,0 +1,19 @@
+agm-map {
+    height: 500px;
+  }
+  
+  
+  * {
+    font-family: Lato;
+  }
+  
+  a {
+    color: darkblue;
+  }
+
+
+  ngx-google-maps {
+    display: block;
+    height: 100vh;
+    width: 100%;
+  }

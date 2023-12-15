@@ -1,3 +1,4 @@
+import { HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 
 
@@ -15,6 +16,17 @@ BaseUrlLogin = "https://localhost:5130/api/Login"
 BaseUrlRoles = "https://localhost:5130/api/Roles"
 
 BaseUrlUser = "https://localhost:5130/api/User"
+
+BaserUrlHunger = "https://localhost:7234/api/Address"
+
+token  = localStorage.getItem("jwt");
+
+httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json',
+    Authorization: 'Bearer ' + this.token
+  })
+};
 
 
 }

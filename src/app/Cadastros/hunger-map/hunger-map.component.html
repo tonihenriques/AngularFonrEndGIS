@@ -1,0 +1,24 @@
+
+<blockquote class="blockquote text-center">
+  <p class="mb-0">Pois eu tive fome, e vocês me deram de comer; tive sede, e vocês me deram de beber; fui estrangeiro, e vocês me acolheram;</p>
+  <br>
+  <footer class="blockquote-footer">Mateus  <cite title="Source Title">25:35</cite></footer>
+</blockquote>
+
+<div  class="mb-3 cadastro">
+  <h3> Digite aqui seu endereço</h3> 
+  <input type="text" class="form-control" ngx-google-places-autocomplete [options]='options' #placesRef="ngx-places" (onAddressChange)="handleAddressChange($event)"/>
+</div>
+
+
+
+
+<!-- <pre class="card card-block card-header">{{message}}</pre> -->
+<ng-template #confimCadastro>
+    <div class="modal-body text-center">
+      <p>Você está confirmando que necessita de ajuda e será cadastrado em nosso mapa.</p>
+      <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+      <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+    </div>
+  </ng-template>
+  

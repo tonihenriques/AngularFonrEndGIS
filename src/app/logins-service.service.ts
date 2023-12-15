@@ -11,6 +11,7 @@ import { BaseUrlComponent } from './Shared/base-url/base-url.component';
 export class LoginsServiceService {
 
   logado = new EventEmitter<boolean>();
+  roleName = new EventEmitter<string>();
 
   logadoService: boolean |any;
 
@@ -19,25 +20,27 @@ export class LoginsServiceService {
    login(credentials: any){
 
     return this.http.post( this.baseUrl.BaseUrlLogin, credentials)
-    .subscribe({
-      next: (data)=> { const token = (<any>data).token;
-         this.logado.emit(true);
-         console.log("Token =", token);
-         console.log("LOGADO TRUE SERVICE = ", this.logado);
-         localStorage.setItem("jwt", token); 
-         this.router.navigate(['/','home']);
-        
-        },      
-      error: ()=> this.logado.emit(false), 
-      complete: () => console.info('complete') ,
-
-    })    
+    
   }
 
-   usuarioautenticado(){  
-    return this.logado    
+   usuarioautenticado(v: boolean){  
+    return this.logado.emit(v);  
     
    }
+   autenticado(){  
+    return this.logado;  
+    
+   }
+
+   nomeDaAutorizacao(s: string){
+    return this.roleName.emit(s)
+   }
+
+   escutaAutorizacao(){
+    return this.roleName
+   }
+
+   
 
 
 

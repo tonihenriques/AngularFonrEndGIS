@@ -12,7 +12,7 @@
           <li  nav-item>
             <a class="nav-link" routerLink="/home">Home</a>
           </li>                          
-          <li ngbDropdown class="nav-item" role="presentation">
+          <li  ngbDropdown class="nav-item" role="presentation">
             <button type="button" class="nav-link" ngbDropdownToggle>Listas</button>
             <div ngbDropdownMenu>             
               <button ngbDropdownItem routerLink="/ListRoles">Roles</button>                           
@@ -21,35 +21,35 @@
               <button ngbDropdownItem>Separated link</button>
             </div>
           </li>      
-          <li ngbDropdown class="nav-item" role="presentation">
+          <li  ngbDropdown class="nav-item" role="presentation">
             <button type="button" class="nav-link" ngbDropdownToggle>Cadastro</button>
             <div ngbDropdownMenu>
               <button ngbDropdownItem routerLink="/usuario">Usuário</button>
-              <button ngbDropdownItem routerLink="/cadastro">Role</button>            
+              <button ngbDropdownItem routerLink="/cadastro">Role</button>   
+              <button ngbDropdownItem routerLink="/hungerMap">Ajuda</button>           
               <button ngbDropdownItem>Another action</button>
               <button ngbDropdownItem>Something else here</button>
               <div class="dropdown-divider"></div>
               <button ngbDropdownItem>Separated link</button>
             </div>
           </li>
-          <li *ngIf="isauth" class="nav-item">
+          <li  class="nav-item">
             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
           </li>
           <li *ngIf="!mostrarMenu || mostrarMenu== undefined " class="nav-item">
             <a class="nav-link" routerLink="/login">login</a>
           </li>
-          <li *ngIf="mostrarMenu " class="nav-item">
+          <li  class="nav-item">
             <a class="nav-link" routerLink=""(click)="logOut()">Logout</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
+  
 
   <div class="container-fluid">
     <router-outlet></router-outlet>
   </div>
   
-
-
 

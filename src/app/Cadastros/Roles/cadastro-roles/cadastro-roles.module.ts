@@ -10,6 +10,7 @@ import { AppComponent } from 'src/app/app.component';
 
 
 
+
 @NgModule({
   declarations: [ 
     CadastroRolesComponent,
@@ -24,6 +25,7 @@ import { AppComponent } from 'src/app/app.component';
     NgbAlertModule,    
     NgFor,   
     AlertModule.forRoot(),  
+   
     
   ],
   providers: [ AlertModalComponent ] , 

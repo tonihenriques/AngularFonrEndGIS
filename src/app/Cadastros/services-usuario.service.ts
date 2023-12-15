@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseUrlComponent } from '../Shared/base-url/base-url.component';
@@ -13,7 +13,8 @@ export class ServicesUsuario {
   addUser(user: any): Observable<any> {
 
     console.log("Usuario =", user)
-    return this.http.post(this.baseUrl.BaseUrlUser, user)
+    return this.http.post(this.baseUrl.BaseUrlUser, user      
+      )
   }
 
 
