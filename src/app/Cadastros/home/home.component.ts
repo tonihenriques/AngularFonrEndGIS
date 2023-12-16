@@ -16,8 +16,10 @@ export class HomeComponent implements OnInit {
 
   constructor(private hungerService: HungerServiceService ){}
 
-  List_addressHunger: addressH | any;
 
+
+  List_addressHunger: addressH | any;
+ 
   ngOnInit(): void {
 
     this.geoLocalize();
@@ -52,7 +54,7 @@ export class HomeComponent implements OnInit {
         this.markers.push(  {
           lat: element.lat,
           lng:  element.lng,
-          label: '*',
+          label: '*',          
           draggable: true
         })       
         
@@ -75,9 +77,10 @@ export class HomeComponent implements OnInit {
 
         this.markers.push(  {
           lat: this.lat,
-          lng:  this.lng,
-          label: '<>',
-          draggable: false
+          lng:  this.lng,                  
+          draggable: false,
+          animation: 'DROP',
+          
         })      
 
     })
@@ -92,10 +95,19 @@ export class HomeComponent implements OnInit {
     console.log(`clicked the marker: ${label || index}`)
   }
 
+  
+  markerOver(m: marker) {
+    m.animation = 'BOUNCE';
+  }
+  
+  markerOut(m: marker) {
+    m.animation = '';
+  }
+
   mapClicked($event: MouseEvent) {
     this.markers.push({
       lat: $event.coords.lat,
-      lng: $event.coords.lng,
+      lng: $event.coords.lng,    
       draggable: true
     });
   }
@@ -105,6 +117,7 @@ export class HomeComponent implements OnInit {
   }
 
   markers: marker[] | any = []
+
 }
 
 
@@ -114,6 +127,7 @@ interface marker {
   lng: number;
   label?: string;
   draggable: boolean;
+  animation: 'DROP' | 'BOUNCE' | '';
 }
 
 
@@ -128,5 +142,6 @@ interface addressH {
   cep:string;
   lat: string;
   lng: string;
+ 
   
 }

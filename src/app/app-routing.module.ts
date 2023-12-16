@@ -9,6 +9,7 @@ import { CadastroRolesComponent } from './Cadastros/Roles/cadastro-roles/cadastr
 import { ListaUsuarioComponent } from './Cadastros/usuario/lista-usuario/lista-usuario.component';
 import { HomeComponent } from './Cadastros/home/home.component';
 import { HungerMapComponent } from './Cadastros/hunger-map/hunger-map.component';
+import { OnboardComponent } from './OnBoard/onboard/onboard.component';
 
 
 
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path:'ListUser', component: ListaUsuarioComponent},
   {path:'cadastro', component: CadastroRolesComponent},   
   {path:'hungerMap', component: HungerMapComponent},
+  {path:'onboard', component: OnboardComponent},
   {path:'home', component: HomeComponent, canActivate: [AuthGuard]}
 ];
 

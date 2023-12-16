@@ -16,10 +16,14 @@
       (markerClick)="clickedMarker(m.label, i)"
       [latitude]="m.lat"
       [longitude]="m.lng"
-      [label]="m.label"
+      [label]="m.label"      
       [markerDraggable]="m.draggable"
-      (dragEnd)="markerDragEnd(m, $event)">
+      (dragEnd)="markerDragEnd(m, $event)"
+      [iconUrl]=" './assets/imageAGM/placeholder3.png'"     
+      >
       
+     
+
     <agm-info-window>
       <strong>InfoWindow content</strong>
     </agm-info-window>

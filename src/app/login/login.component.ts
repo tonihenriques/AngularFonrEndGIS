@@ -41,23 +41,28 @@ export class LoginComponent {
       "role": "string",
       "phoneNumber": "string",
       "roleId": "string",
-      "email": "string"
+      "email": "string",
+      "totalpessoas": "string",
+      "menor10": "string",
+      "maior60": "string",
+      "feminino": "string",
+      "masculino": "string"
 
 
     }
 
-    this.login.login(credentials)     
+    this.login.login(credentials)
 
       .subscribe({
         next: (data) => {
           const token = (<any>data).token;
-          this.isInvalidLogin = false;    
-          this.login.usuarioautenticado(true);          
+          this.isInvalidLogin = false;
+          this.login.usuarioautenticado(true);
           console.log("Token =", token);
           console.log("LOGADO TRUE SERVICE = ", this.isInvalidLogin);
-          localStorage.setItem("jwt", token.token);  
-          localStorage.setItem("email", token.email) 
-          localStorage.setItem("role", token.role)      
+          localStorage.setItem("jwt", token.token);
+          localStorage.setItem("email", token.email)
+          localStorage.setItem("role", token.role)
           this.acessoLoginRoleName = token.role
           this.login.nomeDaAutorizacao(token.role)
           this.router.navigate(['/', 'home']);

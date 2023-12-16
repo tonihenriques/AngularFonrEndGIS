@@ -1,10 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { EMPTY, Observable, catchError, interval, map } from 'rxjs';
+import { FormBuilder,FormGroup, Validators } from '@angular/forms';
+import { Observable, interval} from 'rxjs';
 import { ServicesUsuario } from '../services-usuario.service';
-import { Guid } from 'guid-typescript';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AlertComponent } from 'ngx-bootstrap/alert';
 import { RolesService } from '../Roles/roles.service';
 import { LoginsServiceService } from 'src/app/logins-service.service';
@@ -24,13 +23,20 @@ export class UsuarioComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.getRole();
-    this.escutaAutorizacao();
+    //this.escutaAutorizacao();
+    if (localStorage.getItem("Admin")) {
+      this.roleNameAdmin = true
+    }
+    else {
+      this.roleNameAdmin = false
+    }
 
   }
   ;
 
   checkId: any;
   dados: any;
+  dadosCadastro: any;
   roleDados: any;
   erroMessage: any;
   user$: Observable<any> | any;
@@ -62,11 +68,28 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     //confirmepassword: [''],
     phone: [''],
     roleId: [''],
-    email: ['']
+    email: [''],
+    Totalpessoas: [''],
+    Menor10: [''],
+    Maior60: [''],
+    Feminino: [''],
+    Masculino: ['']
   },
 
 
   )
+
+  credentials = {
+
+    'username': "string",
+    'password': "string",
+    "role": "string",
+    "phoneNumber": "string",
+    "roleId": "string",
+    "email": "string"
+
+
+  }
 
 
 
@@ -74,10 +97,14 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     this.formulario.setValue({
       nome: '',
       password: null,
-      //confirmepassword: null,
       phone: '',
       roleId: '',
-      email: ''
+      email: '',
+      Totalpessoas: '',
+      Menor10: '',
+      Maior60: '',
+      Feminino: '',
+      Masculino: ''
     })
   }
   // get passwordFormField() {
@@ -152,7 +179,12 @@ export class UsuarioComponent implements OnDestroy, OnInit {
       "role": "string",
       "phoneNumber": this.formulario.get('phone')?.value,
       "roleId": this.formulario.get('roleId')?.value,
-      "email": this.formulario.get('email')?.value
+      "email": this.formulario.get('email')?.value,
+      "Totalpessoas": this.formulario.get('Totalpessoas')?.value?.toString(),
+      "Menor10": this.formulario.get('Menor10')?.value?.toString(),
+      "Maior60": this.formulario.get('Maior60')?.value?.toString(),
+      "Feminino": this.formulario.get('Feminino')?.value?.toString(),
+      "Masculino": this.formulario.get('Masculino')?.value?.toString(),
 
     }
 
@@ -162,9 +194,11 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     console.log("CheckId", this.formulario.get('roleId')?.value)
     this.serviceuser.addUser(user)
       .subscribe({
-        next: (data) => { this.success$ = data, this.success = true },
-        error: (e) => { this.error$ = e, this.error = true },
-        complete: () => console.info('complete')
+        next: (data) => {
+          this.success$ = data, this.success = true,  this.router.navigate(['/', 'home']);
+        },
+        error: (e) => { this.error$ = e, this.error = true, console.log("ERROR =", e) },
+        complete: () => { console.info('complete') }
 
       },
       );
@@ -173,6 +207,7 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     //this.ngOnDestroy();
 
   }
+
 
   ngOnDestroy(): void {
     //setTimeout( ()=>{this.success$.unsubscribe()}, 1000);

@@ -19,110 +19,164 @@
         </div>
     </div>
 
-
-    <h1>Cadastro de usuários</h1>
-
     <form class="form-horinzontal row g-3 needs-validation" [formGroup]="formulario" (ngSubmit)="onsubmit()"
         #formularios="ngForm">
+        <h1>Cadastro de usuários</h1>
         <div class="col-sm-7">
             <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="nome">Nome</label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome"
-                        required>
-                    <span class="text-danger"                         
-                        *ngIf="(formulario.get('nome')?.pristine && formulario.get('nome')?.invalid && formulario.get('nome')?.touched)">
-                        Nome é obrigatório
-                    </span>
-                </div>
-
-            </div>
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="password">Password</label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="password" class="form-control" id="password" formControlName="password"
-                        placeholder="Password" >
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <label for="nome">Nome</label>
+                        </div>
+                        <input type="text" class="form-control" id="nome" formControlName="nome" placeholder="Nome"
+                            required>
                         <span class="text-danger"
-                        *ngIf="(formulario.get('password')?.dirty && formulario.get('password')?.invalid && formulario.get('password')?.touched)">
-                        <span class="block" [ngClass]="{'text-primary': formulario.get('password')?.value?.match('^(?=.*[A-Z])')}">Pelo menos letra maiúscula.</span>
+                            *ngIf="(formulario.get('nome')?.pristine && formulario.get('nome')?.invalid && formulario.get('nome')?.touched)">
+                            Nome é obrigatório
+                        </span>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <label for="password">Password</label>
+                        </div>
+                        <input type="password" class="form-control" id="password" formControlName="password"
+                            placeholder="Password">
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('password')?.dirty && formulario.get('password')?.invalid && formulario.get('password')?.touched)">
+                            <span class="block"
+                                [ngClass]="{'text-primary': formulario.get('password')?.value?.match('^(?=.*[A-Z])')}">Pelo
+                                menos letra maiúscula.</span>
 
-                        <span class="block" [ngClass]="{'text-primary': formulario.get('password')?.value?.match('(?=.*[a-z])')}">Pelo menos uma letra minúscula.</span>
+                            <span class="block"
+                                [ngClass]="{'text-primary': formulario.get('password')?.value?.match('(?=.*[a-z])')}">Pelo
+                                menos uma letra minúscula.</span>
 
-                        <span class="block" [ngClass]="{'text-primary': formulario.get('password')?.value?.match('(.*[0-9].*)')}">Pelo menos um dígito.</span>
+                            <span class="block"
+                                [ngClass]="{'text-primary': formulario.get('password')?.value?.match('(.*[0-9].*)')}">Pelo
+                                menos um dígito.</span>
 
-                        <span class="block" [ngClass]="{'text-primary': formulario.get('password')?.value?.match('(?=.*[!@#$%^&*])')}">Pelo menos um caractere especial.</span>
+                            <span class="block"
+                                [ngClass]="{'text-primary': formulario.get('password')?.value?.match('(?=.*[!@#$%^&*])')}">Pelo
+                                menos um caractere especial.</span>
 
-                        <span class="block" [ngClass]="{'text-primary': formulario.get('password')?.value?.match('.{8,}')}">Pelo menos 8 caracteres.</span>
-                        <!-- A senha deve conter pelo menos um número, uma letra maiúscula e uma
+                            <span class="block"
+                                [ngClass]="{'text-primary': formulario.get('password')?.value?.match('.{8,}')}">Pelo
+                                menos 8
+                                caracteres.</span>
+                            <!-- A senha deve conter pelo menos um número, uma letra maiúscula e uma
                         letra minúscula e pelo menos 8 caracteres<br />A senha não pode
                         contém espaços em branco -->
-                    </span>
-                    <span class="text-danger"
-                        *ngIf="(formulario.get('password')?.pristine && formulario.get('password')?.invalid &&  formulario.get('password')?.touched ) ">
-                        Password é obrigatório
-                    </span>
-                </div>
-            </div>
-            <!-- <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="password">Confirme Password</label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="password" [ngClass]="confirmPasswordClass" class="form-control" id="confirmepassword" formControlName="confirmepassword"
-                        placeholder="Confirme Password" >
-
-                        <div *ngIf="formulario.get('confirmepassword')?.errors?.['confirmedValidator']">
-                            Passwords did not match
-                          </div>
-                          
-                      <span class="text-danger"
-                          *ngIf="(formulario.get('confirmepassword')?.pristine && formulario.get('confirmepassword')?.invalid &&  formulario.get('confirmepassword')?.touched ) ">
-                          Password é obrigatório
-                      </span>
-                       
-                      
-                    <span class="text-danger"
-                        *ngIf="(formulario.get('confirmepassword')?.pristine && formulario.get('confirmepassword')?.invalid &&  formulario.get('confirmepassword')?.touched ) ">
-                        Password é obrigatório
-                    </span>
-                    
-                </div>
-            </div> -->
-            <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="email">Email</label>
-                </div>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email" formControlName="email" placeholder="Insira seu melhor Email"
-                        required>                        
-                    <span class="text-danger"
-                        *ngIf="(formulario.get('email')?.dirty && formulario.get('email')?.invalid &&  formulario.get('email')?.touched) " class="text-error">
-                             É necessario um email valido!
-                    </span>
-                    <span class="text-danger"
-                    *ngIf="(formulario.get('email')?.pristine && formulario.get('email')?.invalid &&  formulario.get('email')?.touched) "class="text-error">
-                        Email obrigatório!
-                </span>
+                        </span>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('password')?.pristine && formulario.get('password')?.invalid &&  formulario.get('password')?.touched ) ">
+                            Password é obrigatório
+                        </span>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="col-sm-12">
-                    <label for="phone">Phone Number</label>
+                <div class="row">
+
+                    <div class="col-sm-8">
+                        <div class="col-sm-12">
+                            <label for="email">Email</label>
+                        </div>
+                        <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                            id="email" formControlName="email" placeholder="Insira seu melhor Email" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('email')?.dirty && formulario.get('email')?.invalid &&  formulario.get('email')?.touched) "
+                            class="text-error">
+                            É necessario um email valido!
+                        </span>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('email')?.pristine && formulario.get('email')?.invalid &&  formulario.get('email')?.touched) "
+                            class="text-error">
+                            Email obrigatório!
+                        </span>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="col-sm-12">
+                            <label for="phone">Phone Number</label>
+                        </div>
+                        <input type="text" class="form-control" id="phone" formControlName="phone"
+                            placeholder="Phone Number" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('phone')?.pristine && formulario.get('phone')?.invalid &&  formulario.get('phone')?.touched) ">
+                            Telefone é obrigatório
+                        </span>
+                    </div>
                 </div>
-                <div class="col-sm-12">
-                    <input type="text" class="form-control" id="phone" formControlName="phone"
-                        placeholder="Phone Number" required>
-                    <span class="text-danger"
-                        *ngIf="(formulario.get('phone')?.pristine && formulario.get('phone')?.invalid &&  formulario.get('phone')?.touched) ">
-                        Telefone é obrigatório
-                    </span>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="col-sm-12">
+                            <label for="Totalpessoas">Total de Pessoas na casa</label>
+                        </div>
+                        <input type="number" class="form-control" id="Totalpessoas" formControlName="Totalpessoas"
+                            placeholder="Informe quantas pessoas moram nessa casa" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('Totalpessoas')?.pristine && formulario.get('Totalpessoas')?.invalid &&  formulario.get('Totalpessoas')?.touched) ">
+                            Favor preencher este campo
+                        </span>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-12">
+                            <label for="Menor10">Menores de 10 anos</label>
+                        </div>
+                        <input type="number" class="form-control" id="Menor10" formControlName="Menor10"
+                            placeholder="Informe quantas pessoas menores de 10 anos" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('Menor10')?.pristine && formulario.get('Menor10')?.invalid &&  formulario.get('Menor10')?.touched) ">
+                            Favor preencher este campo
+                        </span>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-12">
+                            <label for="Maior60">Maiores de 60 anos</label>
+                        </div>
+                        <input type="number" class="form-control" id="Maior60" formControlName="Maior60"
+                            placeholder="Informe quantas pessoas maiores de 60 anos" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('Maior60')?.pristine && formulario.get('Maior60')?.invalid &&  formulario.get('Maior60')?.touched) ">
+                            Favor preencher este campo
+                        </span>
+                    </div>
                 </div>
-            </div><br>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="col-sm-12">
+                            <label for="Feminino">Total de Mulheres</label>
+                        </div>
+                        <input type="number" class="form-control" id="Feminino" formControlName="Feminino"
+                            placeholder="Informe o total de mulheres que moram nessa casa" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('Feminino')?.pristine && formulario.get('Feminino')?.invalid &&  formulario.get('Feminino')?.touched) ">
+                            Favor preencher este campo
+                        </span>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="col-sm-12">
+                            <label for="Masculino">Total de Homens</label>
+                        </div>
+                        <input type="number" class="form-control" id="Masculino" formControlName="Masculino"
+                            placeholder="Informe o total de homens que moram nessa casa" required>
+                        <span class="text-danger"
+                            *ngIf="(formulario.get('Masculino')?.pristine && formulario.get('Masculino')?.invalid &&  formulario.get('Masculino')?.touched) ">
+                            Favor preencher este campo
+                        </span>
+                    </div>
+
+                </div><br>
+            </div>
+
         </div>
 
         <div *ngIf="roleNameAdmin" class="col-sm-5">
@@ -160,9 +214,6 @@
             </ng-template>
         </div>
 
-        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Submit</button>
-    </form>
-
-
-
+        <button type="submit" class="btn btn-primary" [disabled]="formulario.invalid">Enviar</button>
+    </form><br><br><br>
 </div>

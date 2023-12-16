@@ -18,6 +18,7 @@ export class LoginsServiceService {
   constructor(private http: HttpClient, private router: Router, private baseUrl: BaseUrlComponent) { }
 
    login(credentials: any){
+    console.log("Credential =", credentials)
 
     return this.http.post( this.baseUrl.BaseUrlLogin, credentials)
     

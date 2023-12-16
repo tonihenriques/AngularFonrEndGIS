@@ -29,6 +29,7 @@ import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { NgxGoogleMapsModule } from '@codious/ngx-google-maps';
 import { HungerMapComponent } from './Cadastros/hunger-map/hunger-map.component';
 import { HungerServiceService } from './Cadastros/hunger-map/hunger-service.service';
+import { OnboardComponent } from './OnBoard/onboard/onboard.component';
 //import { GoogleMapsModule } from '@angular/google-maps';
 
 
@@ -46,7 +47,8 @@ export function tokenGetter(){
     RolesComponent,
     ListaUsuarioComponent,
     BaseUrlComponent,
-    HungerMapComponent,  
+    HungerMapComponent,
+    OnboardComponent,  
    
      
    
