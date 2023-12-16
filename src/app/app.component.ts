@@ -54,6 +54,8 @@ export class AppComponent implements OnInit {
 
  logOut(){
   localStorage.removeItem("jwt");
+  localStorage.removeItem("email");
+  localStorage.removeItem("role");
   this.mostrarMenu = false;  
  
  

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MouseEvent } from '@agm/core';
+import { AgmInfoWindow, MouseEvent } from '@agm/core';
 import { GooglePlaceDirective } from 'ngx-google-places-autocomplete';
 import { HungerServiceService } from '../hunger-map/hunger-service.service';
 
@@ -14,7 +14,7 @@ import { HungerServiceService } from '../hunger-map/hunger-service.service';
 })
 export class HomeComponent implements OnInit {  
 
-  constructor(private hungerService: HungerServiceService ){}
+  constructor(private hungerService: HungerServiceService){}
 
 
 
@@ -23,13 +23,31 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.geoLocalize();
-    this.getListhungerMap();    
+    this.getListhungerMap();  
+    this.getCustomer();  
 
   }
 
   lat: number | any;
   lng: number | any
   zoom: number = 18;  
+  roleAdmin: boolean | any;
+  markers: marker[] | any = [];
+  info: info[] | any = [];
+  inf: any;
+  singleInfoWindow: AgmInfoWindow | any 
+ 
+  indiceinfo: boolean = false;
+
+  getCustomer(){
+    if(localStorage.getItem('role')=="Admin"){
+
+    this.roleAdmin = true;
+
+    }else{ 
+      this.roleAdmin = false;
+    }
+  }
 
   
   getListhungerMap(){
@@ -47,20 +65,24 @@ export class HomeComponent implements OnInit {
 
   listaMarkers(){
 
-    this.List_addressHunger.forEach((element: any) => {
+   
 
-      if(element != null){
+      for(var i=0; i < this.List_addressHunger.length; i++){ 
 
-        this.markers.push(  {
-          lat: element.lat,
-          lng:  element.lng,
-          label: '*',          
-          draggable: true
-        })       
-        
+        this.markers.push({
+          lat: this.List_addressHunger[i].lat,
+          lng:  this.List_addressHunger[i].lng,
+          label: "",  
+          endereco: this.List_addressHunger[i].rua +","+ this.List_addressHunger[i].numero +","+ this.List_addressHunger[i].bairro +","+ this.List_addressHunger[i].cidade,
+          draggable: true,
+          
+        })    
+
+        this.info.push({
+          info: this.List_addressHunger[i].rua +","+ this.List_addressHunger[i].numero +","+ this.List_addressHunger[i].bairro +","+ this.List_addressHunger[i].cidade,
+          position: i+1
+        })
       }
-      
-    });
    
   }
 
@@ -91,8 +113,32 @@ export class HomeComponent implements OnInit {
   @ViewChild("placesRef", { static: false }) placesRef: GooglePlaceDirective | undefined;
 
  
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`)
+  clickedMarker(endereco: string, index: number) {
+    let contador = 0
+  
+    
+
+    for(var i=0; i <= this.info.length; i++){
+
+      contador ++;
+     
+        if(index == this.info[i].position)
+        {       
+   
+         this.inf = this.info[i].info
+
+         this.indiceinfo = true;
+        
+
+         return this.inf        
+   
+        }
+
+    }  
+
+   
+   
+    console.log("clicked the marker:", endereco,index )
   }
 
   
@@ -105,19 +151,22 @@ export class HomeComponent implements OnInit {
   }
 
   mapClicked($event: MouseEvent) {
-    this.markers.push({
-      lat: $event.coords.lat,
-      lng: $event.coords.lng,    
-      draggable: true
-    });
+    // this.markers.push({
+    //   lat: $event.coords.lat,
+    //   lng: $event.coords.lng,    
+    //   draggable: true
+    // });
+
+  //   if (this.singleInfoWindow) {
+  //     this.singleInfoWindow.close();
+  //  }
   }
 
   markerDragEnd(m: marker, $event: MouseEvent) {
     console.log('dragEnd', m, $event);
   }
 
-  markers: marker[] | any = []
-
+ 
 }
 
 
@@ -127,6 +176,8 @@ interface marker {
   lng: number;
   label?: string;
   draggable: boolean;
+  endereco: string;
+  total: number;
   animation: 'DROP' | 'BOUNCE' | '';
 }
 
@@ -143,5 +194,12 @@ interface addressH {
   lat: string;
   lng: string;
  
+  
+}
+
+interface info {
+
+  inf: string;
+  position:any; 
   
 }
