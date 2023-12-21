@@ -19,6 +19,8 @@ BaseUrlUser = "https://localhost:5130/api/User"
 
 BaserUrlHunger = "https://localhost:7234/api/Address"
 
+BaseurlHungerUserAddress = "https://localhost:7234/api/Address/UserAddress"
+
 token  = localStorage.getItem("jwt");
 
 httpOptions = {

@@ -14,7 +14,7 @@
  
   <agm-marker 
   *ngFor="let m of markers; let i = index"
-  (markerClick)="clickedMarker(m.endereco, i)"
+  (markerClick)="clickedMarker(i, infowindow)"
   [latitude]="m.lat"
   [longitude]="m.lng"
   [label]="m.label"      
@@ -22,7 +22,7 @@
   (dragEnd)="markerDragEnd(m, $event)"
   [iconUrl]=" './assets/imageAGM/paint03Marker.png'"     
   >
-<agm-info-window>
+<agm-info-window  #infowindow>
   <strong>{{inf}}</strong>
 </agm-info-window>
 

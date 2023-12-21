@@ -14,6 +14,12 @@ export class HungerServiceService {
 
     return this.http.get(this.baseUrl.BaserUrlHunger,this.baseUrl.httpOptions)
   }
+  
+  getListHungerMapuserAddress() {    
+
+    return this.http.get(this.baseUrl.BaseurlHungerUserAddress,this.baseUrl.httpOptions)
+  }
+
 
   addHungerUser(addressH: any) { 
 
