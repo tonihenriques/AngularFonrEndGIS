@@ -20,6 +20,12 @@ export class HungerServiceService {
     return this.http.get(this.baseUrl.BaseurlHungerUserAddress,this.baseUrl.httpOptions)
   }
 
+  
+  getListAnjo() {    
+
+    return this.http.get(this.baseUrl.BaseurListAnjo + localStorage.getItem("email") ,this.baseUrl.httpOptions)
+  }
+
 
   addHungerUser(addressH: any) { 
 

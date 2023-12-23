@@ -1,6 +1,82 @@
+<div class="row">
+
+    <div class="container-fluid">
+        <h3>Olá que bom que você chegou até aqui. Escolha abaixo se você será um anjo ou carente.</h3>
+    </div>
+    
+        <div class="card-action" *ngIf="cadastroAnjo == true || cadastroCarente ==true">
+            <button (click)="limpaBool()">Retorne</button>
+        </div>
+    
+
+    <div class="col-sm-6">
+        <div class="row" *ngIf="cadastroCarente == false || cadastroAnjo == false">
+            <div class="col s12 m7">
+                <div class="col s8">
+                    <div class="card">
+                        <div class="card-image">
+                            <img width="30px" height="200px" src="./assets/imageAGM/anjo.png">
+                            <span class="card-title">Card Title</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Se você deseja ser um colaborador da nossa causa contra a fome e outras miserias no mundo
+                                clique no link abaixo e faça seu cadastro.
+                            </p>
+                        </div><br><br>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="card-action">
+                                    <button (click)="cadastroUsuarioAnjo()">Cadastre-se - Doador</button>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="row" *ngIf="cadastroCarente == false || cadastroAnjo == false">
+            <div class="col s12 m7">
+                <div class="col s8">
+                    <div class="card">
+                        <div class="card-image">
+                            <img width="30px" height="200px" src="./assets/imageAGM/carente.png">
+                            <span class="card-title">Card Title</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Se você e sua familia necessita de suporte na alimentação então faça sua inscrição.
+                                Assim vai ficar mais fácil encontrar você para podermos ajudá-los.
+                            </p>
+                        </div><br><br>
+                        
+                       
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="card-action">
+                                    <button (click)="cadastroUsuarioCarente()">Cadastre-se - pessoa carente</button>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="card-action" *ngIf="cadastroCarente == true">
+                                    <button (click)="limpaBool()">Retorne</button>
+                                </div>
+                            </div>     
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
 <div class="row g-1">
-
-
     <div *ngIf="success">
         <div *ngFor="let alert of alerts">
             <div *ngIf="alert.type == 'success' ">
@@ -19,8 +95,7 @@
         </div>
     </div>
 
-    <form class="form-horinzontal row g-3 needs-validation" [formGroup]="formulario" (ngSubmit)="onsubmit()"
-        #formularios="ngForm">
+    <form class="form-horinzontal row g-3 needs-validation" [formGroup]="formulario" *ngIf="cadastroAnjo || cadastroCarente" (ngSubmit)="onsubmit()" #formularios="ngForm">
         <h1>Cadastro de usuários</h1>
         <div class="col-sm-7">
             <div class="form-group">
@@ -111,73 +186,77 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="col-sm-12">
-                            <label for="Totalpessoas">Total de Pessoas na casa</label>
+            <div *ngIf="dadosFamilia">
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <label for="Totalpessoas">Total de Pessoas na casa</label>
+                            </div>
+                            <input type="number" class="form-control" id="Totalpessoas" formControlName="Totalpessoas"
+                                placeholder="Informe quantas pessoas moram nessa casa" required>
+                            <span class="text-danger"
+                                *ngIf="(formulario.get('Totalpessoas')?.pristine && formulario.get('Totalpessoas')?.invalid &&  formulario.get('Totalpessoas')?.touched) ">
+                                Favor preencher este campo
+                            </span>
                         </div>
-                        <input type="number" class="form-control" id="Totalpessoas" formControlName="Totalpessoas"
-                            placeholder="Informe quantas pessoas moram nessa casa" required>
-                        <span class="text-danger"
-                            *ngIf="(formulario.get('Totalpessoas')?.pristine && formulario.get('Totalpessoas')?.invalid &&  formulario.get('Totalpessoas')?.touched) ">
-                            Favor preencher este campo
-                        </span>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="col-sm-12">
-                            <label for="Menor10">Menores de 10 anos</label>
+                        <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <label for="Menor10">Menores de 10 anos</label>
+                            </div>
+                            <input type="number" class="form-control" id="Menor10" formControlName="Menor10"
+                                placeholder="Informe quantas pessoas menores de 10 anos" required>
+                            <span class="text-danger"
+                                *ngIf="(formulario.get('Menor10')?.pristine && formulario.get('Menor10')?.invalid &&  formulario.get('Menor10')?.touched) ">
+                                Favor preencher este campo
+                            </span>
                         </div>
-                        <input type="number" class="form-control" id="Menor10" formControlName="Menor10"
-                            placeholder="Informe quantas pessoas menores de 10 anos" required>
-                        <span class="text-danger"
-                            *ngIf="(formulario.get('Menor10')?.pristine && formulario.get('Menor10')?.invalid &&  formulario.get('Menor10')?.touched) ">
-                            Favor preencher este campo
-                        </span>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="col-sm-12">
-                            <label for="Maior60">Maiores de 60 anos</label>
+                        <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <label for="Maior60">Maiores de 60 anos</label>
+                            </div>
+                            <input type="number" class="form-control" id="Maior60" formControlName="Maior60"
+                                placeholder="Informe quantas pessoas maiores de 60 anos" required>
+                            <span class="text-danger"
+                                *ngIf="(formulario.get('Maior60')?.pristine && formulario.get('Maior60')?.invalid &&  formulario.get('Maior60')?.touched) ">
+                                Favor preencher este campo
+                            </span>
                         </div>
-                        <input type="number" class="form-control" id="Maior60" formControlName="Maior60"
-                            placeholder="Informe quantas pessoas maiores de 60 anos" required>
-                        <span class="text-danger"
-                            *ngIf="(formulario.get('Maior60')?.pristine && formulario.get('Maior60')?.invalid &&  formulario.get('Maior60')?.touched) ">
-                            Favor preencher este campo
-                        </span>
                     </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="col-sm-12">
-                            <label for="Feminino">Total de Mulheres</label>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <label for="Feminino">Total de Mulheres</label>
+                            </div>
+                            <input type="number" class="form-control" id="Feminino" formControlName="Feminino"
+                                placeholder="Informe o total de mulheres que moram nessa casa" required>
+                            <span class="text-danger"
+                                *ngIf="(formulario.get('Feminino')?.pristine && formulario.get('Feminino')?.invalid &&  formulario.get('Feminino')?.touched) ">
+                                Favor preencher este campo
+                            </span>
                         </div>
-                        <input type="number" class="form-control" id="Feminino" formControlName="Feminino"
-                            placeholder="Informe o total de mulheres que moram nessa casa" required>
-                        <span class="text-danger"
-                            *ngIf="(formulario.get('Feminino')?.pristine && formulario.get('Feminino')?.invalid &&  formulario.get('Feminino')?.touched) ">
-                            Favor preencher este campo
-                        </span>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="col-sm-12">
-                            <label for="Masculino">Total de Homens</label>
+                        <div class="col-sm-4">
+                            <div class="col-sm-12">
+                                <label for="Masculino">Total de Homens</label>
+                            </div>
+                            <input type="number" class="form-control" id="Masculino" formControlName="Masculino"
+                                placeholder="Informe o total de homens que moram nessa casa" required>
+                            <span class="text-danger"
+                                *ngIf="(formulario.get('Masculino')?.pristine && formulario.get('Masculino')?.invalid &&  formulario.get('Masculino')?.touched) ">
+                                Favor preencher este campo
+                            </span>
                         </div>
-                        <input type="number" class="form-control" id="Masculino" formControlName="Masculino"
-                            placeholder="Informe o total de homens que moram nessa casa" required>
-                        <span class="text-danger"
-                            *ngIf="(formulario.get('Masculino')?.pristine && formulario.get('Masculino')?.invalid &&  formulario.get('Masculino')?.touched) ">
-                            Favor preencher este campo
-                        </span>
-                    </div>
 
-                </div><br>
+                    </div><br>
+                </div>
             </div>
-
         </div>
+
+
 
         <div *ngIf="roleNameAdmin" class="col-sm-5">
             <div class="form-group">

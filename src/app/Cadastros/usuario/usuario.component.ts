@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup, Validators } from '@angular/forms';
-import { Observable, interval} from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, interval } from 'rxjs';
 import { ServicesUsuario } from '../services-usuario.service';
 import { Router } from '@angular/router';
 import { AlertComponent } from 'ngx-bootstrap/alert';
@@ -23,7 +23,6 @@ export class UsuarioComponent implements OnDestroy, OnInit {
 
   ngOnInit(): void {
     this.getRole();
-    //this.escutaAutorizacao();
     if (localStorage.getItem("Admin")) {
       this.roleNameAdmin = true
     }
@@ -32,7 +31,7 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     }
 
   }
-  ;
+
 
   checkId: any;
   dados: any;
@@ -49,17 +48,14 @@ export class UsuarioComponent implements OnDestroy, OnInit {
   passwordsMatching = false;
   isConfirmPasswordDirty = false;
   confirmPasswordClass = 'form-control';
-
-
   error: boolean | any;
   success: boolean | any;
-
   source = interval(1000);
-
-  StrongPasswordRegx: RegExp =
-    /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
-
-
+  StrongPasswordRegx: RegExp = /^(?=[^A-Z]*[A-Z])(?=[^a-z]*[a-z])(?=\D*\d).{8,}$/;
+  cadastroAnjo: boolean = false;
+  cadastroCarente: boolean = false;
+  dadosFamilia: boolean = false;
+  cadastroRole: string | any;
 
 
   formulario = this.formBuilder.group({
@@ -74,24 +70,16 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     Maior60: [''],
     Feminino: [''],
     Masculino: ['']
-  },
-
-
-  )
+  })
 
   credentials = {
-
     'username': "string",
     'password': "string",
     "role": "string",
     "phoneNumber": "string",
     "roleId": "string",
     "email": "string"
-
-
   }
-
-
 
   limpaCampos() {
     this.formulario.setValue({
@@ -107,9 +95,25 @@ export class UsuarioComponent implements OnDestroy, OnInit {
       Masculino: ''
     })
   }
-  // get passwordFormField() {
-  //   return this.formulario.get('password');
-  // }
+
+  cadastroUsuarioCarente() {
+    this.cadastroAnjo = true;
+    this.dadosFamilia = true;
+    this.cadastroRole = "Carente"
+    return this.cadastroCarente = true;
+  }
+
+  cadastroUsuarioAnjo() {
+    this.cadastroCarente = true;
+    this.dadosFamilia = false;
+    this.cadastroRole = "Anjo"
+    return this.cadastroAnjo = true;
+  }
+
+  limpaBool() {
+    this.cadastroAnjo = false;
+    this.cadastroCarente = false;
+  }
 
 
   ConfirmedValidator(controlName: string, matchingControlName: string) {
@@ -130,17 +134,11 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     };
   }
 
-
   resetPasswordForm() {
-
     var password = this.formulario.get('password')?.value;
     var newpassword = this.formulario.get('confirmepassword')?.value;
-
     validator: this.ConfirmedValidator('password', 'newpassword');
-
   };
-
-
 
   alerts: any[] = [{
     type: 'success',
@@ -152,31 +150,22 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     type: 'danger',
     msg: `ERROR: Ocorreu um erro inesperado  em  ${new Date().toLocaleDateString()} as ${new Date().toLocaleTimeString()}`,
     timeout: 7000,
-
   }
   ];
-
 
   onClosed(dismissedAlert: AlertComponent): void {
     this.alerts = this.alerts.filter(alert => alert !== dismissedAlert);
   }
-
-
-
   get registerFormControl() {
     return this.formulario.controls;
   }
 
-
   onsubmit() {
-
     this.submitted = true;
-
     const user = {
-
       "username": this.formulario.get('nome')?.value,
       "password": this.formulario.get('password')?.value,
-      "role": "string",
+      "role": this.cadastroRole,
       "phoneNumber": this.formulario.get('phone')?.value,
       "roleId": this.formulario.get('roleId')?.value,
       "email": this.formulario.get('email')?.value,
@@ -185,27 +174,20 @@ export class UsuarioComponent implements OnDestroy, OnInit {
       "Maior60": this.formulario.get('Maior60')?.value?.toString(),
       "Feminino": this.formulario.get('Feminino')?.value?.toString(),
       "Masculino": this.formulario.get('Masculino')?.value?.toString(),
-
+      
     }
 
-
-    console.log(this.formulario)
-
-    console.log("CheckId", this.formulario.get('roleId')?.value)
     this.serviceuser.addUser(user)
       .subscribe({
         next: (data) => {
-          this.success$ = data, this.success = true,  this.router.navigate(['/', 'home']);
+          this.success$ = data, this.success = true, this.router.navigate(['/', 'home']);
         },
         error: (e) => { this.error$ = e, this.error = true, console.log("ERROR =", e) },
         complete: () => { console.info('complete') }
-
       },
       );
 
     this.limpaCampos();
-    //this.ngOnDestroy();
-
   }
 
 
@@ -213,7 +195,6 @@ export class UsuarioComponent implements OnDestroy, OnInit {
     //setTimeout( ()=>{this.success$.unsubscribe()}, 1000);
     //setInterval(this.success$.unsubscribe(),1000)
   }
-
 
   getUser() {
     this.serviceuser.getUsers()
@@ -228,8 +209,6 @@ export class UsuarioComponent implements OnDestroy, OnInit {
       })
   }
 
-
-
   getRole() {
     this.rolservice.getRoles()
       .subscribe({
@@ -243,24 +222,14 @@ export class UsuarioComponent implements OnDestroy, OnInit {
       })
   }
 
-
-
   onRefresh() {
     setTimeout(() => {
       window.location.reload()
     }, 7000);
-
   }
-
-
   escutaAutorizacao() {
-
     return this.roleNameAdmin = this.login.escutaAutorizacao();
-
-
   }
-
-
 }
 
 

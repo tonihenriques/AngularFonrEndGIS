@@ -14,19 +14,20 @@ import { Guid } from 'guid-typescript';
 })
 
 
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   isInvalidLogin: Boolean | any;
   retornoError: string | any;
   mostrarMenu: boolean | any;
   acessoLoginRoleName: string | any;
 
-
-
-
-
   constructor(private http: HttpClient, private router: Router, private login: LoginsServiceService) {
 
+  }
+  ngOnInit(): void {
+
+    localStorage.clear();
+    
   }
 
   onSubmit(form: NgForm) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,5 +9,24 @@ import { Component } from '@angular/core';
   
 })
 export class OnboardComponent {
+
+  
+  constructor( private router: Router) {
+  }
+
+
+
+  cadastroAnjo(){
+
+    this.router.navigate(['/', 'onboard']);
+
+  }
+  
+
+  cadastroCarente(){
+
+    this.router.navigate(['/', 'onboard']);
+
+  }
 
 }

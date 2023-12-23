@@ -4,24 +4,18 @@
 </ng-template> -->
 
 
-
-
-
-    <form   #f="ngForm" class="form" action="" method="post" (ngSubmit)="onSubmit(f)" >
-        
+    <form   #f="ngForm" class="form" action="" method="post" (ngSubmit)="onSubmit(f)" >        
         <div id="login">
             <h3 class="text-center text-white pt-5">Login form</h3>           
             <div class="container">
                 <div id="login-row" class="row justify-content-center align-items-center">
                     <div id="login-column" class="col-md-6">
-                        <div id="login-box" class="col-md-12">
-                          
+                        <div id="login-box" class="col-md-12">                          
                                 <h3 class="text-center text-info">Login</h3>
                                 <div *ngIf="isInvalidLogin">
                                     <div style="color: red;">
                                         {{retornoError}}
-                                    </div>
-                                   
+                                    </div>                                   
                                 </div>
                                 <div class="form-group">
                                     <label for="nome" class="text-info">Username:</label><br>
@@ -40,15 +34,11 @@
                                         <div class="col-md-4">
                                             <p><a class="link-opacity-10-hover"  routerLink="/usuario">Cadastre-se</a></p>
                                         </div>
-                                       
-                                    </div>
-                                    
+                                    </div>                                    
                                     <div class="d-grid gap-2">
                                     <button type="submit" class="btn btn-outline-success btn-lg">Entrar</button> 
                                     </div>
-                                </div>
-                               
-                        
+                                </div>            
                         </div>
                     </div>
                 </div>

@@ -58,7 +58,6 @@ export class AppComponent implements OnInit {
   localStorage.removeItem("role");
   this.mostrarMenu = false;  
  
- 
  }
 
  isauth: boolean = this.isUserAuthenticated();

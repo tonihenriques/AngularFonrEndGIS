@@ -1,43 +1,51 @@
 <div class="row">
-    <div class="col-sm-4">
+
+    <div class="container-fluid">
+        <h3>Olá que bom que você chegou até aqui. Escolha abaixo se você será um anjo ou carente.</h3>
+    </div>
+    <div class="col-sm-6">
 
         <div class="row">
             <div class="col s12 m7">
+                <div class="col s8">
                 <div class="card">
                     <div class="card-image">
-                        <img width="80px" height="300px" src="./assets/imageAGM/paint02.png">
+                        <img width="30px" height="200px" src="./assets/imageAGM/anjo.png">
                         <span class="card-title">Card Title</span>
                     </div>
                     <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
+                        <p>Se você deseja ser um colaborador da nossa causa contra a fome e outras miserias no mundo
+                            clique no link abaixo e faça seu cadastro. 
+                        </p>
                     </div><br><br>
                     <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <a href="#"  (click)="cadastroAnjo()">Cadastre-se como doador</a>
                     </div>
                 </div>
-            </div>
+            </div> </div>
 
         </div>
     </div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
 
         <div class="row">
             <div class="col s12 m7">
+                <div class="col s8">
                 <div class="card">
                     <div class="card-image">
-                        <img width="80px" height="300px" src="./assets/imageAGM/paint01.png">
+                        <img width="30px" height="200px" src="./assets/imageAGM/carente.png">
                         <span class="card-title">Card Title</span>
                     </div>
                     <div class="card-content">
-                        <p>I am a very simple card. I am good at containing small bits of information.
-                            I am convenient because I require little markup to use effectively.</p>
+                        <p>Se você e sua familia necessita de suporte na alimentação  então  faça sua inscrição.
+                            Assim vai ficar mais fácil encontrar você para podermos ajudá-los.
+                        </p>
                     </div><br><br>
                     <div class="card-action">
-                        <a href="#">This is a link</a>
+                        <a href="#" (click)="cadastroCarente()">Cadastre-se como pessoa carente</a>
                     </div>
                 </div>
-            </div>
+            </div> </div>
         </div>
 
     </div>

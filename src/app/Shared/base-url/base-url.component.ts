@@ -21,7 +21,14 @@ BaserUrlHunger = "https://localhost:7234/api/Address"
 
 BaseurlHungerUserAddress = "https://localhost:7234/api/Address/UserAddress"
 
+BaseurListAnjo = "https://localhost:7234/api/Address/UserAnjo/"
+
 token  = localStorage.getItem("jwt");
+
+iconMapCarente = " './assets/imageAGM/carenteMap.png'" 
+
+iconMapAnjo = " './assets/imageAGM/anjoMap.png'" 
+
 
 httpOptions = {
   headers: new HttpHeaders({
