@@ -23,6 +23,8 @@ BaseurlHungerUserAddress = "https://localhost:7234/api/Address/UserAddress"
 
 BaseurListAnjo = "https://localhost:7234/api/Address/UserAnjo/"
 
+BaseurlAlimentos = "https://localhost:7234/api/Alimentos"
+
 token  = localStorage.getItem("jwt");
 
 iconMapCarente = " './assets/imageAGM/carenteMap.png'" 

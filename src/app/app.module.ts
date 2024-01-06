@@ -30,6 +30,7 @@ import { NgxGoogleMapsModule } from '@codious/ngx-google-maps';
 import { HungerMapComponent } from './Cadastros/hunger-map/hunger-map.component';
 import { HungerServiceService } from './Cadastros/hunger-map/hunger-service.service';
 import { OnboardComponent } from './OnBoard/onboard/onboard.component';
+import { AlimentosComponent } from './Cadastros/alimentos/alimentos.component';
 //import { GoogleMapsModule } from '@angular/google-maps';
 
 
@@ -48,7 +49,8 @@ export function tokenGetter(){
     ListaUsuarioComponent,
     BaseUrlComponent,
     HungerMapComponent,
-    OnboardComponent,  
+    OnboardComponent,
+    AlimentosComponent,  
    
      
    

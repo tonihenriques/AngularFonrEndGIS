@@ -1,0 +1,75 @@
+<h1>Cadastre um alimento</h1>
+<br>
+<form [formGroup]="formulario" class="form-horinzontal row g-3 needs-validation" (ngSubmit)="onSubmit()"
+    #formularios="ngForm">
+    <div class="row">
+        <div class="input-field col s6">
+            <i class="material-icons prefix">local_dining</i>
+            <input formControlName="nome" placeholder="Cadastre o nome do Alimento" name="nome" ngModel required>
+            <span class="text-danger"
+                *ngIf="(formulario.get('nome')?.pristine && formulario.get('nome')?.invalid && formulario.get('nome')?.touched)">
+                Alimento é obrigatório
+            </span>
+        </div>
+        <div>
+            <h3>Unidade</h3>
+            <div class="row">
+                <div class="col-sm-4">
+                    <label>
+                        <input formControlName="unidade" type="radio" [value]="'kg'" />
+                        <span>Kilo</span>
+                    </label>
+                </div>
+                <div class="col-sm-4">
+                    <label>
+                        <input formControlName="unidade" type="radio" [value]="'lt'" />
+                        <span>Litro</span>
+                    </label>
+                </div>
+                <div class="col-sm-4">
+                    <label>
+                        <input formControlName="unidade" type="radio" [value]="'Pcte'" />
+                        <span>Pacote</span>
+                    </label>    
+                </div>
+
+            </div>
+            
+            <span class="text-danger"
+                *ngIf="(formulario.get('unidade')?.pristine && formulario.get('unidade')?.invalid && formulario.get('unidade')?.untouched)">
+                Escolha uma unidade de medida
+            </span>
+        </div>
+    </div>
+    <br>
+    <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="formulario.invalid">Cadastrar
+        <i class="material-icons right">send</i>
+    </button>
+</form>
+
+<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Alimentos Cadastrados</th>
+            <th [width]="400" scope="col">Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let item of listaAlimentos">
+
+            <td>
+              {{ item.nome }}
+
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="deleteAlimento(item.id)">Delete</button>
+            </td>
+
+        </tr>
+
+    </tbody>
+
+    
+</table>
